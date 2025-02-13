@@ -5,7 +5,7 @@ on:
   workflow_dispatch
     
 env:
-  ROM_URL: https://sysupwrdl.vivo.com.cn/upgrade/official/officialFiles/PD2231_A_13.0.12.2.W10.V000L1-update-full_1669623627.zip
+  ROM_URL: https://cyfuture.dl.sourceforge.net/project/kamisroms/Mido/Crdroid/Android14/crDroidAndroid-14.0-20240101-mido-v10.0.zip?viasf=1
   ROM_NAME: MIUI
   BUILD_AB: true
   BUILD_AONLY: true
