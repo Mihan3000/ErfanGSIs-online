@@ -5,7 +5,7 @@ on:
   workflow_dispatch
     
 env:
-  ROM_URL: https://phoenixnap.dl.sourceforge.net/project/kamisroms/Mido/Crdroid/crDroidAndroid-13.0-20231014-mido-v9.10.zip?viasf=1
+  ROM_URL: https://bn.d.miui.com/V14.0.6.0.TKPMIXM/miui_CHOPINGlobal_V14.0.6.0.TKPMIXM_d809eee4ce_13.0.zip
   ROM_NAME: MIUI
   BUILD_AB: true
   BUILD_AONLY: true
