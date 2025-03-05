@@ -14,7 +14,7 @@ on:
     
 env:
   ROM_URL: https://drive.usercontent.google.com/download?id=1--3O0DtvP9bxLUS5bPhaBOGby0qKR_xp&export=download&authuser=0&confirm=t&uuid=770e6bb6-db5a-44cf-8ca5-dae8bd8a1e5c&at=AEz70l61zMlhgyHK6wYE58B4SQVH%3A1741181966036
-  ROM_NAME: Generic
+  ROM_NAME: Miui
   BUILD_TYPE: ab
   TZ: Asia/Shanghai
 
