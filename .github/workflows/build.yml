@@ -13,7 +13,7 @@ on:
 
     
 env:
-  ROM_URL:https://phoenixnap.dl.sourceforge.net/project/kamisroms/Mido/Crdroid/crDroidAndroid-13.0-20231014-mido-v9.10.zip?viasf=1
+  ROM_URL: https://altushost-swe.dl.sourceforge.net/project/kamisroms/Mido/Crdroid/crDroidAndroid-15.0-20250207-mido-v11.1.zip?viasf=1
   ROM_NAME: Generic
   BUILD_TYPE: ab
   TZ: Asia/Shanghai
