@@ -20,8 +20,8 @@ env:
 
 jobs:
   build:
-    runs-on: macOS-12
     if: github.event.repository.owner.id == github.event.sender.id
+    runs-on: ubuntu-24.04
 
     steps:
        - name: Checkout
