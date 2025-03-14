@@ -37,9 +37,10 @@ jobs:
         echo "Makefile Name: ${{ github.event.inputs.MAKEFILE_NAME }}"
         echo "Build Target: ${{ github.event.inputs.BUILD_TARGET }}.img"
         echo "::endgroup::"
-    steps:
-       - name: Checkout
-         uses: actions/checkout@master
+        
+    # You might want to Checkout your repo first, but not mandatory
+        - name: Check Out
+          uses: actions/checkout@v4
            
        - name: Initialization environment
          run: | 
