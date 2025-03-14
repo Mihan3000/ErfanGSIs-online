@@ -4,15 +4,15 @@ on:
   workflow_dispatch
     
 env:
-  ROM_URL: https://kumisystems.dl.sourceforge.net/project/xiaomi-eu-multilang-miui-roms/xiaomi.eu/MIUI-STABLE-RELEASES/MIUIv12/xiaomi.eu_multi_HMNote8_V12.5.5.0.RCOCNXM_v12-11.zip?viasf=1
+  ROM_URL: https://deac-riga.dl.sourceforge.net/project/xiaomi-eu-multilang-miui-roms/xiaomi.eu/MIUI-STABLE-RELEASES/MIUIv12/xiaomi.eu_multi_HMNote8_V12.5.5.0.RCOCNXM_v12-11.zip?viasf=1
   ROM_NAME: Generic
   BUILD_AB: true
   BUILD_AONLY: true
-  ROM_AB: xiaomi-eu.zip
+  ROM_AB: xiaomi.eu_multi_HMNote8_V12.5.5.0.RCOCNXM_v12-11.zip
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
