@@ -13,7 +13,7 @@ on:
 
     
 env:
-  ROM_URL: https://bigota.d.miui.com/V12.5.3.0.QCPCNXM/olivelite_images_V12.5.3.0.QCPCNXM_20211105.0000.00_10.0_cn_11862639cb.tgz
+  ROM_URL: https://unlimited.dl.sourceforge.net/project/orionos/A15_vanilla/mido/OrionOS-15.1-Hydroxide-mido-Official-Vanilla-20250304.zip?viasf=1
   ROM_NAME: Generic
   BUILD_TYPE: ab
   TZ: Asia/Shanghai
