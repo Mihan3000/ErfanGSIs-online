@@ -13,7 +13,7 @@ on:
 
     
 env:
-  ROM_URL: https://bn.d.miui.com/V12.5.12.0.RKJCNXM/ares_images_V12.5.12.0.RKJCNXM_20211129.0000.00_11.0_cn_e8cc69b884.tgz
+  ROM_URL: https://bn.d.miui.com/V12.5.5.0.RCOCNXM/ginkgo_images_V12.5.5.0.RCOCNXM_20220801.0000.00_11.0_cn_5c9c74ecd8.tgz
   ROM_NAME: Generic
   BUILD_TYPE: ab
   TZ: Asia/Shanghai
