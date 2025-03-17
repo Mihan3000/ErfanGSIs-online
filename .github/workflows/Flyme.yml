@@ -13,7 +13,7 @@ on:
 
     
 env:
-  ROM_URL: https://4pda.to/stat/go?u=https%3A%2F%2Ffirmware.meizu.com%2FFirmware%2FFlyme%2Fmeizu20%2F10.2.0.0%2Fcn%2F20231016121016%2F79f081e8%2Fupdate.zip&e=125699216
+  ROM_URL: https://firmware.meizu.com/Firmware/Flyme/meizu20/10.2.0.0/cn/20231016121016/79f081e8/update.zip
   ROM_NAME: Generic
   BUILD_TYPE: ab
   TZ: Asia/Shanghai
