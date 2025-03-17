@@ -13,7 +13,7 @@ on:
 
     
 env:
-  ROM_URL: https://unlimited.dl.sourceforge.net/project/orionos/A15_vanilla/mido/OrionOS-15.1-Hydroxide-mido-Official-Vanilla-20250304.zip?viasf=1
+  ROM_URL: https://bn.d.miui.com/OS1.0.4.0.TKJCNXM/ares_images_OS1.0.4.0.TKJCNXM_20250211.0000.00_13.0_cn_0cf4129557.tgz
   ROM_NAME: Generic
   BUILD_TYPE: ab
   TZ: Asia/Shanghai
