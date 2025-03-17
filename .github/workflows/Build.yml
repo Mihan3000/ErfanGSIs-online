@@ -20,7 +20,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
@@ -61,7 +61,7 @@ jobs:
               if [[ $(du -sb "GSI.zip" | awk '{print $1}') -gt 2097152000 ]];then
                   echo -e "split packaging..."
                   tar -cpzf - "GSI.zip" | split -d -b 1024m - "upload/GSI.zip"
-              else
+              else 
                   mv GSI.zip upload/
               fi
               ls "upload"                  
@@ -73,4 +73,3 @@ jobs:
            tag: ErfanGSIs-${{ env.ROM_NAME }}-${{ env.BUILD_TYPE }}-${{ env.BUILD_TIME }}
            bodyFile: "${{ github.workspace }}/ErfanGSIs/output/info.txt"
            token: ${{ secrets.PAT }}
-           
