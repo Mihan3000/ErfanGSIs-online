@@ -1,14 +1,23 @@
 name: build_ErfanGSIs
 
 on:
-  workflow_dispatch
+#  release:
+#    types: [published]
+#  push:
+#    branches:
+#      - master
+#    paths:
+#      - '.config'
+#  schedule:
+#    - cron: 0 8 * * 5
+  watch:
+    types: [started]
     
 env:
-  ROM_URL: https://deac-riga.dl.sourceforge.net/project/xiaomi-eu-multilang-miui-roms/xiaomi.eu/MIUI-STABLE-RELEASES/MIUIv12/xiaomi.eu_multi_HMNote8_V12.5.5.0.RCOCNXM_v12-11.zip?viasf=1
+  ROM_URL: https://bn.d.miui.com/OS1.0.4.0.TKJCNXM/ares_images_OS1.0.4.0.TKJCNXM_20250211.0000.00_13.0_cn_0cf4129557.tgz
   ROM_NAME: Generic
-  BUILD_AB: true
-  BUILD_AONLY: true
-  ROM_AB: xiaomi.eu_multi_V12.5.5.0.7z
+  BUILD_TYPE: ab
+  TZ: Asia/Shanghai
 
 jobs:
   build:
@@ -18,60 +27,46 @@ jobs:
     steps:
        - name: Checkout
          uses: actions/checkout@master
-       
-       - name: Clean Up
-         run: |
-           docker rmi `docker images -q`
-           sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d
-           sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php*
-           sudo -E apt-get update
-           sudo -E apt-get -y autoremove --purge
-           sudo -E apt-get clean 
            
        - name: Initialization environment
          run: |
-            sudo -E apt-get -qq update
-            sudo -E apt-get -qq install git openjdk-8-jdk p7zip gzip
+            sudo -E apt-get -qq install git wget
        
        - name: Clone ErfanGSI Source Code
-         run: git clone --recurse-submodules https://github.com/erfanoabdi/ErfanGSIs.git
-       - uses: actions/setup-python@v4
-         with:
-             python-version: '3.10'
-       - name: Setting up ErfanGSI requirements
-         run: |
-              sudo chmod -R 777 ErfanGSIs
-              cd ErfanGSIs
-              sudo bash setup.sh
-       
-       - name: Download Stock Rom & Generate Aonly GSI
-         if: env.BUILD_AONLY == 'true'
-         run: sudo ./ErfanGSIs/url2GSI.sh -a $ROM_URL $ROM_NAME
-       
-       - name: 7z Aonly GSI
-         if: env.BUILD_AONLY == 'true'
-         run: 7za a -t7z -r $ROM_AONLY ErfanGSIs/output/*
-       
-       - name: Upload Aonly GSI to WeTransfer
-         if: env.BUILD_AONLY == 'true'
-         run: |
-              curl -sL https://git.io/file-transfer | sh
-              ./transfer wet $ROM_AONLY
-           
-       - name: Clear output
-         if: env.BUILD_AB == 'true'
-         run: sudo rm -rf ErfanGSIs/output/*
+         run: git clone --recurse-submodules https://github.com/erfanoabdi/ErfanGSIs.git ErfanGSIs
          
-       - name: Download Stock Rom & Generate AB GSI
-         if: env.BUILD_AB == 'true'
-         run: sudo ./ErfanGSIs/url2GSI.sh -b $ROM_URL $ROM_NAME
-
-       - name: 7z AB GSI
-         if: env.BUILD_AB == 'true'
-         run: 7za a -t7z -r $ROM_AB ErfanGSIs/output/*
-
-       - name: Upload AB GSI to WeTransfer
-         if: env.BUILD_AB == 'true'
+       - name: Fix exit
          run: |
+              sed -i 's/\|\| exit 1//g' $GITHUB_WORKSPACE/ErfanGSIs/url2GSI.sh
+              sed -i 's/exit 1//g' $GITHUB_WORKSPACE/ErfanGSIs/url2GSI.sh
+       
+       - name: Setting up ErfanGSI requirements with XiaoxinSGSI setup script
+         run: |
+              cd $GITHUB_WORKSPACE/ErfanGSIs
+              mkdir ./output
+              sudo bash ./setup.sh
+              
+       - name: Download Stock Rom & Generate GSI
+         run: |
+             cd $GITHUB_WORKSPACE/ErfanGSIs
+             sudo bash ./url2GSI.sh -c --$BUILD_TYPE $ROM_URL $ROM_NAME
+       
+       - name: Zip GSI  
+         run: |
+              cd $GITHUB_WORKSPACE/ErfanGSIs/output
+              mkdir upload
+              zip -r GSI.zip ./*
+              if [[ $(du -sb "GSI.zip" | awk '{print $1}') -gt 2097152000 ]];then
+                  echo -e "split packaging..."
+                  tar -cpzf - "GSI.zip" | split -d -b 1024m - "upload/GSI.zip"
+              else
+                  mv GSI.zip upload/
+              fi
+              ls "upload"                  
+              
+       - name: Upload GSI to WeTransfer
+         run: |
+              cd $GITHUB_WORKSPACE/ErfanGSIs/output
               curl -sL https://git.io/file-transfer | sh
-              ./transfer wet $ROM_AB
+              ./transfer wet ./upload/*
+            
